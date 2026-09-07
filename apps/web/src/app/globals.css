@@ -1,25 +1,43 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
 
-  /* Outer letterbox area shown beside the shell once the viewport exceeds --shell-max-width */
-  --shell-max-width: 1024px;
-  --shell-background: #f4f4f5;
+@theme {
+  /*
+   * COLOR RULE — semantic tokens only, this list is exhaustive.
+   * - No primitive scale (no blue-500, gray-100, ...): --color-*: initial wipes Tailwind's
+   *   built-in palette below, so an unregistered color has no class at all (typo-safe).
+   * - Never write raw hex in a component's `style` prop — add a token here instead.
+   * - Need a color that isn't listed here? Stop and ask; don't invent one.
+   */
+  --color-*: initial;
+
+  --color-background: #fff8f8;
+  --color-primary: #4a4a4a;
+  --color-accent: #ff7d96;
+  --color-muted-foreground: #b7b7b7;
+  --color-muted: #e6e6e6;
+
+  /* Light text/icons on dark surfaces (e.g. captions over the scrim gradient). */
+  --color-inverse: #ffffff;
+
+  /* Letterbox area outside the 1024px shell on wide viewports — kept neutral gray on purpose. */
+  --color-shell-background: #f4f4f5;
+
+  /* Dim gradient over images for text legibility (Figma: 29% C6C6C6 -> 67% Background/Black). */
+  --color-scrim-start: #c6c6c6;
+  --color-scrim-end: #000000;
+
+  /* Named token instead of an arbitrary value (max-w-shell), enforced by eslint-plugin-tailwindcss. */
+  --container-shell: 1024px;
 
   /* iOS notch / Android gesture bar safe areas — needs viewport-fit=cover (see layout.tsx) */
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
+  --spacing-safe-t: env(safe-area-inset-top, 0px);
+  --spacing-safe-r: env(safe-area-inset-right, 0px);
+  --spacing-safe-b: env(safe-area-inset-bottom, 0px);
+  --spacing-safe-l: env(safe-area-inset-left, 0px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --shell-background: #000000;
-  }
-}
+/* No dark palette defined yet — ask for dark-mode values before re-adding a
+   prefers-color-scheme override here. */
 
 html {
   height: 100%;
@@ -39,28 +57,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--foreground);
-  background: var(--shell-background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-primary);
+  background: var(--color-shell-background);
+  font-family:
+    var(--font-noto-sans-kr),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Malgun Gothic",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: contain;
   -webkit-tap-highlight-color: transparent;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
