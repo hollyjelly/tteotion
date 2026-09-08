@@ -23,17 +23,25 @@ apps/web/src/
     globals.css          # Tailwind import + 디자인 토큰(@theme) + 전역 리셋
   features/
     {feature}/
-      {feature}-screen.tsx      # 실제 화면 컴포넌트
-      items.ts (등)             # 그 기능 전용 데이터/API 함수, 훅, 타입
+      {feature}.tsx             # 실제 화면 컴포넌트 (폴더명이 이미 기능을 나타내므로 -screen 접미사 안 붙임)
+      constants.ts, items.ts 등 # 그 기능 전용 데이터/API 함수, 훅, 타입
   components/            # 여러 화면이 공유하는 것만 (app-shell, bottom-nav 등)
 ```
 
 **규칙**: 화면/기능 하나 추가할 때 반드시 두 곳을 같이 만든다.
 
 1. `app/{경로}/page.tsx` — 라우팅용, `features/{경로}`의 화면 컴포넌트를 import해서 렌더만 함
-2. `features/{경로}/{경로}-screen.tsx` — 실제 내용
+2. `features/{경로}/{경로}.tsx` — 실제 내용
 
 여러 화면에서 재사용되는 게 아니면 `components/`에 넣지 않는다 (기능 전용 컴포넌트는 해당 `features/` 폴더 안에 둔다).
+
+### 파일명 컨벤션
+
+- **파일명은 케밥 케이스**(`app-shell.tsx`, `recent-patterns-slider.tsx`), **컴포넌트 export 이름은 파스칼 케이스**(`AppShell`, `RecentPatternsSlider`). 파일명과 export 이름을 1:1로 맞추지 않는다 (예: `main.tsx`가 `Main`을 export).
+- 이렇게 정한 이유: Windows/macOS는 대소문자를 구분 안 하지만 대부분의 CI/배포 서버(Linux)는 구분한다. `MainScreen.tsx`처럼 파일명에 대소문자가 섞이면, import 경로의 대소문자를 잘못 써도 로컬에서는 에러 없이 동작하다가 Linux 빌드에서만 터지는 버그가 생길 수 있다. 케밥 케이스(전부 소문자)는 이 문제 자체가 발생하지 않는다.
+- 파스칼 케이스(`MainScreen.tsx`)도 업계에서 흔히 쓰는 방식이라 틀린 컨벤션은 아니다 (Airbnb 스타일 가이드, Next.js 공식 예제 등). 다만 이 프로젝트는 위 이유로 케밥 케이스를 택했다 — 새 파일 만들 때 임의로 파스칼 케이스를 섞지 않는다.
+- **컴포넌트는 `export default`가 아니라 `export function`(named export)으로 내보낸다.** 예: `export function Main() { ... }`. named export는 import할 때 이름이 고정되어 있어서(`import { Main } from "./main"`) 파일마다 제멋대로 이름을 바꿔 부르는 걸 막아주고, 자동 리팩터링/이름 찾기도 더 잘 된다.
+  - **예외**: Next.js가 `export default`를 강제하는 특수 파일(`page.tsx`, `layout.tsx`, `manifest.ts`, `error.tsx` 등)은 프레임워크 규칙을 따른다 — 이건 우리 선택이 아니라 Next.js 요구사항이다.
 
 ## 3. 레이아웃 — App Shell (1024px 고정폭)
 
@@ -87,6 +95,7 @@ apps/web/src/
   | `shell-background` | `#F4F4F5` | 1024px 밖 레터박스 배경 — 앱 영역과 구분되도록 의도적으로 무채색 회색 유지 |
   | `scrim-start` / `scrim-end` | `#C6C6C6` / `#000000` | 이미지 위 텍스트 가독성용 딤(dim) 그라데이션 (피그마 stop 29%/67% 그대로) |
   | `inverse` | `#FFFFFF` | 어두운 배경/스크림 위에 쓰는 흰색 — 배경(`bg-inverse`)·텍스트(`text-inverse`) 둘 다 이 토큰 하나로 씀 (`primary`처럼 이름 하나로 여러 역할) |
+  | `surface` | `#F5F5F7` | 기본 배경(`background`)과 구분되는, 강조/구분이 필요한 영역의 배경 (예: 캘린더 "오늘" 셀). 특정 컴포넌트 전용이 아니라 범용으로 재사용 가능 |
 - 새 색이 필요하면 `globals.css`의 `@theme`에 `--color-{이름}: {값};` 형식으로 추가한다.
 - **다크모드는 현재 정의되어 있지 않다.** 라이트 팔레트만 확정된 상태이며, 다크모드 값 없이 임의로 만들어 넣지 않는다. 다크모드가 필요해지면 실제 값을 받은 뒤 `@media (prefers-color-scheme: dark) { :root { ... } }` 블록을 추가한다.
 
@@ -102,7 +111,7 @@ apps/web/src/
 
 ## 7. 새 화면 추가 체크리스트
 
-1. `src/features/{이름}/{이름}-screen.tsx` 생성
+1. `src/features/{이름}/{이름}.tsx` 생성
 2. `src/app/{경로}/page.tsx` 생성 — 위 컴포넌트를 import해서 렌더
 3. 하단 탭에 노출할 화면이면 `src/components/bottom-nav.tsx`의 `tabs` 배열에 추가
 4. 여러 화면에서 재사용할 게 아니면 컴포넌트를 `features/{이름}/` 밖으로 꺼내지 않는다
