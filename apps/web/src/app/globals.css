@@ -14,13 +14,16 @@
   --color-primary: #4a4a4a;
   --color-accent: #ff7d96;
   --color-muted-foreground: #b7b7b7;
-  --color-muted: #e6e6e6;
+  --color-muted: #d9d9d9;
 
   /* Light text/icons on dark surfaces (e.g. captions over the scrim gradient). */
   --color-inverse: #ffffff;
 
   /* Letterbox area outside the 1024px shell on wide viewports — kept neutral gray on purpose. */
   --color-shell-background: #f4f4f5;
+
+  /* Background for an area highlighted/elevated above the base background (e.g. calendar's "today" cell). */
+  --color-surface: #f5f5f7;
 
   /* Dim gradient over images for text legibility (Figma: 29% C6C6C6 -> 67% Background/Black). */
   --color-scrim-start: #c6c6c6;
