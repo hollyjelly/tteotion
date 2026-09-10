@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { ServiceWorkerRegister } from "./service-worker-register";
 import { AppShell } from "@/components/app-shell";
-
-const notoSansKR = Noto_Sans_KR({
-  variable: "--font-noto-sans-kr",
-  subsets: ["latin"],
-  weight: "variable",
-});
+import { pretendardFont } from "@/fonts/pretendard";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,7 +29,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={notoSansKR.variable}>
+    <html lang="ko" className={pretendardFont.variable}>
       <body>
         <ServiceWorkerRegister />
         <Providers>

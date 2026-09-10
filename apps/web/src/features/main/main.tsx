@@ -15,7 +15,7 @@ export function Main() {
     const handleAddCategoryPress = () => {}
 
   return (
-    <div className="flex flex-1 flex-col gap-9 px-4 pt-6 pb-12 max-md:gap-5">
+    <div className="flex flex-1 flex-col gap-9 px-4 pt-16 pb-20 max-md:gap-5">
         {/* 최근 조회한 도안 */}
         <div>
             <SectionHeader title="최근 작업한 도안">

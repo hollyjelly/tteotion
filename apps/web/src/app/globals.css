@@ -32,6 +32,9 @@
   /* Named token instead of an arbitrary value (max-w-shell), enforced by eslint-plugin-tailwindcss. */
   --container-shell: 1024px;
 
+  /* Bottom nav elevation — no default Tailwind shadow step matches this spec. */
+  --shadow-nav: 0px 4px 10px rgba(0, 0, 0, 0.25);
+
   /* iOS notch / Android gesture bar safe areas — needs viewport-fit=cover (see layout.tsx) */
   --spacing-safe-t: env(safe-area-inset-top, 0px);
   --spacing-safe-r: env(safe-area-inset-right, 0px);
@@ -63,7 +66,7 @@ body {
   color: var(--color-primary);
   background: var(--color-shell-background);
   font-family:
-    var(--font-noto-sans-kr),
+    var(--font-pretendard),
     -apple-system,
     BlinkMacSystemFont,
     "Malgun Gothic",
