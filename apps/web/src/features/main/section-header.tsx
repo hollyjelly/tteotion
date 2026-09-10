@@ -7,8 +7,8 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ title, children }: SectionHeaderProps) {
     return (
-        <div className="mb-5 flex items-center justify-between px-2 max-md:mb-2">
-            <h2 className="text-xl font-bold max-md:text-lg">{title}</h2>
+        <div className="mb-2 flex items-center justify-between pr-2 pl-1">
+            <h2 className="text-lg font-bold max-md:text-base">{title}</h2>
             {children}
         </div>
     )
