@@ -2,20 +2,28 @@ import { ArrowLeftSvg } from "./svgs/arrow-left";
 import { ArrowRightSvg } from "./svgs/arrow-right";
 import { CirclePlusFillSvg } from "./svgs/circle-plus-fill";
 import { FolderPlusSvg } from "./svgs/folder-plus";
+import { HomeSvg } from "./svgs/home";
+import { KnittingNeedlesSvg } from "./svgs/knitting-needles";
 import { PinAltFilledSvg } from "./svgs/pin-alt-filled";
 import { PlusSvg } from "./svgs/plus";
 import { RightArrowSvg } from "./svgs/right-arrow";
 import { SettingFilledSvg } from "./svgs/setting-filled";
+import { UserSvg } from "./svgs/user";
+import { YarnBallSvg } from "./svgs/yarn-ball";
 
 const ICONS = {
   "arrow-left": ArrowLeftSvg,
   "arrow-right": ArrowRightSvg,
   "circle-plus-fill": CirclePlusFillSvg,
   "folder-plus": FolderPlusSvg,
+  "home": HomeSvg,
+  "knitting-needles": KnittingNeedlesSvg,
   "pin-alt-filled": PinAltFilledSvg,
   "plus": PlusSvg,
   "right-arrow": RightArrowSvg,
   "setting-filled": SettingFilledSvg,
+  "user": UserSvg,
+  "yarn-ball": YarnBallSvg,
 };
 
 type IconName = keyof typeof ICONS;
