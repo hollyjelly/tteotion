@@ -3,6 +3,7 @@ import { ArrowRightSvg } from "./svgs/arrow-right";
 import { CirclePlusFillSvg } from "./svgs/circle-plus-fill";
 import { FolderPlusSvg } from "./svgs/folder-plus";
 import { PinAltFilledSvg } from "./svgs/pin-alt-filled";
+import { PlusSvg } from "./svgs/plus";
 import { RightArrowSvg } from "./svgs/right-arrow";
 import { SettingFilledSvg } from "./svgs/setting-filled";
 
@@ -12,6 +13,7 @@ const ICONS = {
   "circle-plus-fill": CirclePlusFillSvg,
   "folder-plus": FolderPlusSvg,
   "pin-alt-filled": PinAltFilledSvg,
+  "plus": PlusSvg,
   "right-arrow": RightArrowSvg,
   "setting-filled": SettingFilledSvg,
 };
